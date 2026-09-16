@@ -1,0 +1,24 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+body {
+    font-family: Arial, sans-serif;
+    color: #173D22;
+}
+
+button,
+input {
+    font-family: inherit;
+}

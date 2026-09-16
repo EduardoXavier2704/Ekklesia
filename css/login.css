@@ -1,25 +1,37 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* =========================
+   FUNDO DA PÁGINA
+========================= */
 
 body {
-    font-family: Arial, sans-serif;
     background-color: #F7F5ED;
-    color: #173D22;
+
+    background-image: url("../assets/fundo.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
+
+
+/* =========================
+   CONTAINER DO LOGIN
+========================= */
 
 .login-container {
     min-height: calc(100vh - 70px);
 
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
 
     padding: 40px 20px;
 }
+
+
+/* =========================
+   CARD
+========================= */
 
 .login-card {
     width: 100%;
@@ -34,50 +46,21 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #F7F5ED;
-    color: #173D22;
-}
-
-.login-container {
-    min-height: calc(100vh - 70px);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    padding: 40px 20px;
-}
-
-.login-card {
-    width: 100%;
-    max-width: 580px;
-
-    background-color: #FFFFFF;
-
-    padding: 40px;
-
-    border-radius: 12px;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
+/* =========================
+   LOGO
+========================= */
 
 .logo-area {
     text-align: center;
+
     margin-bottom: 35px;
 }
 
 .logo-area img {
     width: 90px;
     height: 90px;
+
     object-fit: contain;
 }
 
@@ -97,6 +80,11 @@ body {
 
     color: #315B3C;
 }
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
 
 .form-group {
     display: flex;
@@ -129,17 +117,22 @@ body {
     border-color: #2E7D32;
 }
 
+
+/* =========================
+   BOTÃO
+========================= */
+
 form button {
     width: 100%;
 
     padding: 15px;
-
     margin-top: 5px;
 
     border: none;
     border-radius: 6px;
 
     background-color: #1F6B35;
+
     color: #FFFFFF;
 
     font-size: 17px;
@@ -151,6 +144,11 @@ form button {
 form button:hover {
     background-color: #164C27;
 }
+
+
+/* =========================
+   ESQUECI A SENHA
+========================= */
 
 form > a {
     display: block;
@@ -170,16 +168,22 @@ form > a:hover {
     text-decoration: underline;
 }
 
+
+/* =========================
+   VERSÍCULO
+========================= */
+
 .versiculo {
     margin-top: 35px;
 
-    text-align: center;
-
     max-width: 650px;
+
+    text-align: center;
 }
 
 .versiculo p {
     font-size: 17px;
+
     line-height: 1.6;
 }
 
@@ -192,6 +196,11 @@ form > a:hover {
 
     color: #66736A;
 }
+
+
+/* =========================
+   RODAPÉ
+========================= */
 
 footer {
     height: 70px;
@@ -207,15 +216,27 @@ footer {
     font-size: 14px;
 }
 
-body {
-    font-family: Arial, sans-serif;
 
-    background-color: #F7F5ED;
+/* =========================
+   RESPONSIVIDADE
+========================= */
 
-    background-image: url("../assets/fundo.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+@media (max-width: 600px) {
 
-    color: #173D22;
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .logo-area h1 {
+        font-size: 34px;
+    }
+
+    .logo-area p {
+        font-size: 16px;
+    }
+
+    .versiculo p {
+        font-size: 15px;
+    }
+
 }
