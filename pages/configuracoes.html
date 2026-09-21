@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekklesia | Configurações</title>
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/inicio.css">
+<link rel="stylesheet" href="../css/gestao.css">
+<script src="../js/dados.js" defer>
+</script>
+<script src="../js/gestao.js" defer>
+</script>
+</head>
+<body data-page="configuracoes">
+<a class="skip-link" href="#page-content">Ir para o conteúdo</a>
+    <div class="layout">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-logo">
+                <img src="../assets/logo.jpeg" alt="Logo Ekklesia">
+
+                <div>
+                    <h1>EKKLESIA</h1>
+                    <span>Gestão para Comunidades</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Navegação principal">
+
+                <a href="inicio.html" class="menu-item">
+                    <span>⌂</span>
+                    Início
+                </a>
+
+                <a href="membros.html" class="menu-item">
+                    <span>♙</span>
+                    Membros
+                </a>
+
+                <a href="ministerios.html" class="menu-item">
+                    <span>♧</span>
+                    Ministérios
+                </a>
+
+                <a href="celulas.html" class="menu-item">
+                    <span>♧</span>
+                    Células
+                </a>
+
+                <a href="escalas.html" class="menu-item">
+                    <span>▦</span>
+                    Escalas
+                </a>
+
+                <a href="campanhas.html" class="menu-item">
+                    <span>♡</span>
+                    Campanhas
+                </a>
+
+                <a href="relatorios.html" class="menu-item">
+                    <span>▤</span>
+                    Relatórios
+                </a>
+
+                <a href="configuracoes.html" class="menu-item active" aria-current="page">
+                    <span>⚙</span>
+                    Configurações
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="login.html" class="menu-item">
+                    <span>➜</span>
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+
+
+
+        <!-- CONTEÚDO -->
+        <main class="main-content">
+
+            <!-- TOPO DO SISTEMA -->
+            <header class="topbar">
+
+                <!-- LADO ESQUERDO -->
+                <div class="topbar-left">
+
+                    <button class="menu-button" type="button" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="true">
+                        ☰
+                    </button>
+
+                    <span>Configurações</span>
+
+                </div>
+
+
+                <!-- LADO DIREITO -->
+                <div class="topbar-right">
+
+                    <!-- NOTIFICAÇÕES -->
+                    <button class="notification-button" type="button" aria-label="Notificações">
+                        ♧
+                    </button>
+
+
+                    <!-- PERFIL -->
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            A
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong>Administrador</strong>
+                            <span>Administrador</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+<section class="dashboard module-page" id="page-content">
+<div class="page-heading module-heading">
+<div>
+<span class="eyebrow">GESTÃO DA COMUNIDADE</span>
+<h2>Configurações</h2>
+<p>Personalize a apresentação da comunidade neste navegador.</p>
+</div>
+</div>
+<p class="demo-notice">Demonstração • dados fictícios, salvos apenas neste navegador. Utilize informações de teste.</p>
+<div class="settings-grid">
+<section class="dashboard-card">
+<div class="card-header">
+<div>
+<small>COMUNIDADE</small>
+<h3>Informações de apresentação</h3>
+</div>
+</div>
+<form id="settings-form">
+<div class="form-grid">
+<div class="field full">
+<label for="community-name">Nome da comunidade</label>
+<input id="community-name" name="comunidade" required maxlength="80" placeholder="Nome da sua igreja ou comunidade">
+</div>
+<div class="field">
+<label for="community-city">Cidade</label>
+<input id="community-city" name="cidade" maxlength="80">
+</div>
+<div class="field">
+<label for="community-email">E-mail de contato</label>
+<input id="community-email" name="email" type="email" maxlength="120">
+</div>
+</div>
+<p class="context-note">Estas informações ficam apenas neste navegador. Nenhum dado é enviado a um servidor.</p>
+<button class="button" type="submit">Salvar informações</button>
+</form>
+</section>
+<section class="dashboard-card">
+<div class="card-header">
+<div>
+<small>ACESSO</small>
+<h3>Ambiente de demonstração</h3>
+</div>
+</div>
+<p class="context-note">O perfil Administrador exibido nas telas é ilustrativo. Autenticação, alteração de senha e permissões por perfil ainda dependem do backend.</p>
+<dl class="settings-details">
+<dt>Armazenamento</dt>
+<dd>Local, neste navegador</dd>
+<dt>Dados iniciais</dt>
+<dd>Fictícios e independentes por módulo</dd>
+</dl>
+</section>
+<section class="dashboard-card full">
+<div class="card-header">
+<div>
+<small>DADOS LOCAIS</small>
+<h3>Restaurar demonstração</h3>
+</div>
+</div>
+<p class="context-note">Restaure os registros de exemplo de todos os módulos. Os cadastros e as edições locais serão removidos; as informações de apresentação serão preservadas.</p>
+<button class="button danger secondary" id="reset-demo" type="button">Restaurar dados de exemplo</button>
+</section>
+</div>
+</section>
+</main>
+</div>
+<dialog id="record-dialog" aria-labelledby="dialog-title">
+<div class="dialog-heading">
+<h2 id="dialog-title">
+</h2>
+<button class="icon-button" type="button" data-close aria-label="Fechar janela">×</button>
+</div>
+<div id="dialog-content">
+</div>
+</dialog>
+<div id="toast" role="status" aria-live="polite" hidden>
+</div>
+<noscript>
+<p class="demo-notice">Ative o JavaScript para carregar os registros e os formulários.</p>
+</noscript>
+</body>
+</html>

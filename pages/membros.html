@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekklesia | Membros</title>
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/inicio.css">
+<link rel="stylesheet" href="../css/gestao.css">
+<script src="../js/dados.js" defer>
+</script>
+<script src="../js/gestao.js" defer>
+</script>
+</head>
+<body data-page="membros">
+<a class="skip-link" href="#page-content">Ir para o conteúdo</a>
+    <div class="layout">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-logo">
+                <img src="../assets/logo.jpeg" alt="Logo Ekklesia">
+
+                <div>
+                    <h1>EKKLESIA</h1>
+                    <span>Gestão para Comunidades</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Navegação principal">
+
+                <a href="inicio.html" class="menu-item">
+                    <span>⌂</span>
+                    Início
+                </a>
+
+                <a href="membros.html" class="menu-item active" aria-current="page">
+                    <span>♙</span>
+                    Membros
+                </a>
+
+                <a href="ministerios.html" class="menu-item">
+                    <span>♧</span>
+                    Ministérios
+                </a>
+
+                <a href="celulas.html" class="menu-item">
+                    <span>♧</span>
+                    Células
+                </a>
+
+                <a href="escalas.html" class="menu-item">
+                    <span>▦</span>
+                    Escalas
+                </a>
+
+                <a href="campanhas.html" class="menu-item">
+                    <span>♡</span>
+                    Campanhas
+                </a>
+
+                <a href="relatorios.html" class="menu-item">
+                    <span>▤</span>
+                    Relatórios
+                </a>
+
+                <a href="configuracoes.html" class="menu-item">
+                    <span>⚙</span>
+                    Configurações
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="login.html" class="menu-item">
+                    <span>➜</span>
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+
+
+
+        <!-- CONTEÚDO -->
+        <main class="main-content">
+
+            <!-- TOPO DO SISTEMA -->
+            <header class="topbar">
+
+                <!-- LADO ESQUERDO -->
+                <div class="topbar-left">
+
+                    <button class="menu-button" type="button" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="true">
+                        ☰
+                    </button>
+
+                    <span>Membros</span>
+
+                </div>
+
+
+                <!-- LADO DIREITO -->
+                <div class="topbar-right">
+
+                    <!-- NOTIFICAÇÕES -->
+                    <button class="notification-button" type="button" aria-label="Notificações">
+                        ♧
+                    </button>
+
+
+                    <!-- PERFIL -->
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            A
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong>Administrador</strong>
+                            <span>Administrador</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+<section class="dashboard module-page" id="page-content">
+<div class="page-heading module-heading">
+<div>
+<span class="eyebrow">GESTÃO DA COMUNIDADE</span>
+<h2>Membros</h2>
+<p>Gerencie os membros da sua comunidade.</p>
+</div>
+<div class="heading-actions">
+<button type="button" class="button" id="add-record">＋ Novo Membro</button>
+</div>
+</div>
+<p class="demo-notice">Demonstração • dados fictícios, salvos apenas neste navegador. Utilize informações de teste.</p>
+<div class="stats-grid" id="module-stats" aria-label="Indicadores">
+</div>
+<form class="filters" id="filters" role="search">
+<div class="search-field">
+<label for="search">Buscar</label>
+<input id="search" type="search" placeholder="Buscar por nome ou outras informações…">
+</div>
+<div id="filter-fields" class="filter-fields">
+</div>
+<button class="button secondary" type="reset">Limpar filtros</button>
+</form>
+<section class="table-panel" aria-label="Listagem de membros">
+<div class="table-scroll">
+<table id="records-table">
+<caption class="sr-only">Membros da comunidade — dados demonstrativos</caption>
+<thead>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+<div class="table-footer">
+<p id="result-count" aria-live="polite">
+</p>
+<nav id="pagination" aria-label="Paginação">
+</nav>
+</div>
+</section>
+<section id="calendar" class="table-panel" hidden aria-label="Calendário de escalas">
+</section>
+</section>
+</main>
+</div>
+<dialog id="record-dialog" aria-labelledby="dialog-title">
+<div class="dialog-heading">
+<h2 id="dialog-title">
+</h2>
+<button class="icon-button" type="button" data-close aria-label="Fechar janela">×</button>
+</div>
+<div id="dialog-content">
+</div>
+</dialog>
+<div id="toast" role="status" aria-live="polite" hidden>
+</div>
+<noscript>
+<p class="demo-notice">Ative o JavaScript para carregar os registros e os formulários.</p>
+</noscript>
+</body>
+</html>

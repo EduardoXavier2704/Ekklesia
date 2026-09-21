@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/inicio.css">
+    <link rel="stylesheet" href="../css/gestao.css">
+    <script src="../js/gestao.js" defer></script>
 </head>
 
 <body>
@@ -16,7 +18,7 @@
     <div class="layout">
 
         <!-- MENU LATERAL -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
 
             <div class="sidebar-logo">
                 <img src="../assets/logo.jpeg" alt="Logo Ekklesia">
@@ -59,12 +61,12 @@
                     Campanhas
                 </a>
 
-                <a href="#" class="menu-item">
+                <a href="relatorios.html" class="menu-item">
                     <span>▤</span>
                     Relatórios
                 </a>
 
-                <a href="#" class="menu-item">
+                <a href="configuracoes.html" class="menu-item">
                     <span>⚙</span>
                     Configurações
                 </a>
@@ -94,7 +96,7 @@
                 <!-- LADO ESQUERDO -->
                 <div class="topbar-left">
 
-                    <button class="menu-button" type="button">
+                    <button class="menu-button" type="button" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="true">
                         ☰
                     </button>
 
@@ -107,7 +109,7 @@
                 <div class="topbar-right">
 
                     <!-- NOTIFICAÇÕES -->
-                    <button class="notification-button" type="button">
+                    <button class="notification-button" type="button" aria-label="Notificações">
                         ♧
                     </button>
 
@@ -379,6 +381,7 @@
 
     </div>
 
+<div id="toast" role="status" aria-live="polite" hidden></div>
 </body>
 
 </html>
