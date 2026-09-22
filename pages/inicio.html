@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/gestao.css">
+    <script src="../js/dados.js" defer></script>
     <script src="../js/gestao.js" defer></script>
+    <script src="../js/inicio.js" defer></script>
 </head>
 
-<body>
+<body class="dashboard-page">
 
     <div class="layout">
 
@@ -138,6 +140,7 @@
             <section class="dashboard">
 
                 <!-- TÍTULO -->
+                <div class="dashboard-heading">
                 <div class="page-heading">
 
                     <span>VISÃO GERAL</span>
@@ -151,6 +154,13 @@
                 </div>
 
 
+                <div class="dashboard-update">
+                    <div><strong id="dashboard-source">Carregando dados…</strong><span id="last-update" role="status"></span></div>
+                    <button type="button" class="button secondary" id="refresh-dashboard">↻ Atualizar</button>
+                </div>
+                </div>
+                <p id="dashboard-error" class="form-error" role="alert" hidden></p>
+
                 <!-- INDICADORES -->
                 <div class="stats-grid">
 
@@ -159,7 +169,7 @@
 
                         <div>
                             <span>Membros</span>
-                            <strong>248</strong>
+                            <strong data-count="membros">—</strong>
                         </div>
                     </div>
 
@@ -168,7 +178,7 @@
 
                         <div>
                             <span>Ministérios</span>
-                            <strong>8</strong>
+                            <strong data-count="ministerios">—</strong>
                         </div>
                     </div>
 
@@ -177,7 +187,7 @@
 
                         <div>
                             <span>Células</span>
-                            <strong>12</strong>
+                            <strong data-count="celulas">—</strong>
                         </div>
                     </div>
 
@@ -186,7 +196,7 @@
 
                         <div>
                             <span>Escalas</span>
-                            <strong>6</strong>
+                            <strong data-count="escalas">—</strong>
                         </div>
                     </div>
 
@@ -197,80 +207,18 @@
                 <div class="dashboard-grid">
 
                     <!-- ESCALAS -->
-                    <section class="dashboard-card">
-
+                    <section class="dashboard-card" aria-labelledby="upcoming-title">
                         <div class="card-header">
-
-                            <div>
-                                <small>ORGANIZAÇÃO</small>
-                                <h3>Próximas escalas</h3>
+                            <div><small>ORGANIZAÇÃO</small><h3 id="upcoming-title">Próximas escalas</h3></div>
+                            <div class="schedule-actions">
+                                <button type="button" class="button secondary" id="open-availability" aria-haspopup="dialog" aria-controls="availability-dialog">▦ Selecionar data</button>
+                                <a href="escalas.html">Ver todas</a>
                             </div>
-
-                            <a href="escalas.html">
-                                Ver todas
-                            </a>
-
                         </div>
-
-
-                        <div class="schedule-item">
-
-                            <div class="schedule-date">
-                                <strong>07</strong>
-                                <span>SET</span>
-                            </div>
-
-                            <div>
-                                <strong>Culto de Domingo</strong>
-                                <p>Música • Recepção • Mídia</p>
-                            </div>
-
-                            <span class="status confirmed">
-                                Confirmada
-                            </span>
-
-                        </div>
-
-
-                        <div class="schedule-item">
-
-                            <div class="schedule-date">
-                                <strong>10</strong>
-                                <span>SET</span>
-                            </div>
-
-                            <div>
-                                <strong>Culto de Quarta</strong>
-                                <p>Música • Recepção</p>
-                            </div>
-
-                            <span class="status confirmed">
-                                Confirmada
-                            </span>
-
-                        </div>
-
-
-                        <div class="schedule-item">
-
-                            <div class="schedule-date">
-                                <strong>14</strong>
-                                <span>SET</span>
-                            </div>
-
-                            <div>
-                                <strong>Culto de Domingo</strong>
-                                <p>Música • Mídia • Recepção</p>
-                            </div>
-
-                            <span class="status pending">
-                                Pendente
-                            </span>
-
-                        </div>
-
+                        <p class="context-note">Selecione a data em que tem disponibilidade para servir em um culto.</p>
+                        <div id="upcoming-schedules" aria-live="polite"><p class="context-note">Carregando escalas…</p></div>
+                        <p id="availability-feedback" class="availability-feedback" role="status" hidden></p>
                     </section>
-
 
                     <!-- EVENTOS -->
                     <section class="dashboard-card">
@@ -280,6 +228,7 @@
                             <div>
                                 <small>AGENDA</small>
                                 <h3>Próximos eventos</h3>
+                                <p class="agenda-note">Agenda demonstrativa</p>
                             </div>
 
                         </div>
@@ -319,60 +268,37 @@
                 </div>
 
 
-                <!-- CAMPANHA -->
-                <section class="campaign-card">
-
-                    <div class="campaign-info">
-
-                        <small>CAMPANHA ATIVA</small>
-
-                        <h3>Doação com Amor</h3>
-
-                        <p>
-                            Acompanhe o andamento das doações
-                            realizadas pela comunidade.
-                        </p>
-
-                        <a href="campanhas.html">
-                            Ver campanha
-                        </a>
-
+                <!-- CAMPANHAS -->
+                <section class="campaign-card dashboard-carousel" aria-label="Campanhas em destaque" aria-roledescription="carrossel">
+                    <button type="button" class="carousel-arrow previous" id="previous-campaign" aria-label="Campanha anterior">‹</button>
+                    <div id="campaign-slide" class="campaign-slide" role="group" aria-roledescription="slide">
+                        <div class="campaign-info">
+                            <small id="campaign-status">CAMPANHAS</small>
+                            <h3 id="campaign-title">Carregando campanhas…</h3>
+                            <p id="campaign-description"></p>
+                            <a href="campanhas.html">Ver campanhas</a>
+                        </div>
+                        <div class="campaign-metrics" id="campaign-metrics">
+                            <div class="campaign-amount"><span>Arrecadado</span><strong id="campaign-raised">—</strong></div>
+                            <progress id="campaign-progress" max="100" value="0" aria-label="Progresso da campanha"></progress>
+                            <div class="campaign-amount"><span id="campaign-target">Meta: —</span><strong id="campaign-percent">—</strong></div>
+                            <div class="campaign-stats">
+                                <div><strong id="campaign-donations">—</strong><span>Doações registradas</span></div>
+                                <div><strong id="campaign-other">—</strong><span id="campaign-other-label">Entregue</span></div>
+                            </div>
+                        </div>
+                        <div class="campaign-donation" id="campaign-donation">
+                            <div class="campaign-qr"><img id="campaign-qr-image" alt="" hidden><span id="campaign-qr-placeholder">QR Code<br>não configurado</span></div>
+                            <div><p id="campaign-payment-note">Doação online ainda indisponível.</p><a class="button donate-button" id="donate-link" target="_blank" rel="noopener noreferrer" hidden>♡ Doar agora</a><button class="button donate-button" id="donate-unavailable" type="button" disabled aria-describedby="campaign-payment-note">♡ Doar agora</button></div>
+                        </div>
                     </div>
-
-
-                    <div class="campaign-progress">
-
-                        <div>
-                            <span>Arrecadado</span>
-                            <strong>R$ 7.500</strong>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div></div>
-                        </div>
-
-                        <div>
-                            <span>Meta: R$ 10.000</span>
-                            <strong>75%</strong>
-                        </div>
-
+                    <button type="button" class="carousel-arrow next" id="next-campaign" aria-label="Próxima campanha">›</button>
+                    <div class="carousel-dots" role="group" aria-label="Selecionar campanha">
+                        <button type="button" data-campaign-index="0" aria-label="Campanha 1" aria-pressed="true" disabled></button>
+                        <button type="button" data-campaign-index="1" aria-label="Campanha 2" aria-pressed="false" disabled></button>
+                        <button type="button" data-campaign-index="2" aria-label="Campanha 3" aria-pressed="false" disabled></button>
                     </div>
-
-
-                    <div class="campaign-stats">
-
-                        <div>
-                            <strong>126</strong>
-                            <span>Doações</span>
-                        </div>
-
-                        <div>
-                            <strong>84</strong>
-                            <span>Famílias atendidas</span>
-                        </div>
-
-                    </div>
-
+                    <p class="sr-only" id="campaign-announcement" aria-live="polite"></p>
                 </section>
 
             </section>
@@ -381,6 +307,26 @@
 
     </div>
 
+<dialog id="availability-dialog" aria-labelledby="availability-title" aria-describedby="availability-note">
+    <div class="dialog-heading"><h2 id="availability-title">Selecionar data</h2><button type="button" class="icon-button" id="close-availability" aria-label="Fechar calendário">×</button></div>
+    <p class="context-note" id="availability-note">Escolha o membro para este registro local. A identificação automática dependerá do login do sistema.</p>
+    <form id="availability-form">
+        <label for="availability-member">Membro</label>
+        <select id="availability-member" required><option value="">Selecione seu cadastro</option></select>
+        <div class="availability-month"><button type="button" class="icon-button" id="previous-month" aria-label="Mês anterior">‹</button><h3 id="availability-month-title" aria-live="polite"></h3><button type="button" class="icon-button" id="next-month" aria-label="Próximo mês">›</button></div>
+        <div class="availability-weekdays" aria-hidden="true"><span>DOM</span><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span></div>
+        <div class="availability-days" id="availability-days" role="group" aria-label="Datas de cultos disponíveis"></div>
+        <p class="context-note" id="calendar-help">Selecione um dia com culto cadastrado.</p>
+        <label for="availability-worship">Culto e horário</label>
+        <select id="availability-worship" required disabled><option value="">Selecione uma data</option></select>
+        <label for="availability-observation" class="observation-label">Observação (opcional)</label>
+        <textarea id="availability-observation" rows="2" maxlength="500" placeholder="Informe alguma observação sobre sua disponibilidade"></textarea>
+        <p class="form-error" id="availability-error" role="alert"></p>
+        <button type="submit" class="button confirm-availability" id="confirm-availability" disabled>Confirmar disponibilidade</button>
+        <p id="availability-history" class="context-note" aria-live="polite"></p>
+    </form>
+</dialog>
+<noscript><p class="demo-notice">Ative o JavaScript para carregar os dados do Dashboard.</p></noscript>
 <div id="toast" role="status" aria-live="polite" hidden></div>
 </body>
 

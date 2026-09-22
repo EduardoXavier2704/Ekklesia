@@ -755,3 +755,109 @@ window.Ekklesia = {
   ]
 }
 };
+
+/* Ponto único de leitura e escrita local, substituível por um repositório de API. */
+(() => {
+  const app = window.Ekklesia;
+  const dataKey = 'ekklesia.demonstracao.v1';
+  const availabilityKey = 'ekklesia.disponibilidades.v1';
+  const clone = value => JSON.parse(JSON.stringify(value));
+  function validate(data) {
+    if (!data || !Object.keys(app.seed).every(module => Array.isArray(data[module]) &&
+      new Set(data[module].map(row => row?.id)).size === data[module].length &&
+      data[module].every(row => row && typeof row.id === 'string' && app.schemas[module].fields.every(([field, , type, options]) =>
+        type === 'number' ? Number.isFinite(row[field]) && row[field] >= 0 :
+        typeof row[field] === 'string' && (type !== 'select' || options.includes(row[field])))))) {
+      throw new Error('Os dados locais estão inválidos. Nenhum registro foi substituído.');
+    }
+    return data;
+  }
+  function load() {
+    const saved = localStorage.getItem(dataKey);
+    return saved === null ? clone(app.seed) : validate(JSON.parse(saved));
+  }
+  function publish(key) { window.dispatchEvent(new CustomEvent('ekklesia:storage', { detail: { key } })); }
+  function saveModule(module, rows) {
+    if (!app.schemas[module]) throw new Error('Módulo desconhecido.');
+    const data = load();
+    data[module] = clone(rows);
+    localStorage.setItem(dataKey, JSON.stringify(validate(data)));
+    publish(dataKey);
+  }
+  function loadAvailability() {
+    const rows = JSON.parse(localStorage.getItem(availabilityKey) || '[]');
+    if (!Array.isArray(rows) || !rows.every(row => row && typeof row.id === 'string' && typeof row.id_membro === 'string' && typeof row.id_escala === 'string' && typeof row.data === 'string' && typeof row.horario === 'string' && typeof row.disponivel === 'boolean')) {
+      throw new Error('Não foi possível ler as disponibilidades locais.');
+    }
+    return rows;
+  }
+  function scheduleDate(row) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(row.data) || !/^\d{2}:\d{2}$/.test(row.horario)) return null;
+    const date = new Date(row.data + 'T' + row.horario + ':00');
+    return Number.isNaN(date.getTime()) || date.getFullYear() !== Number(row.data.slice(0,4)) || date.getMonth()+1 !== Number(row.data.slice(5,7)) || date.getDate() !== Number(row.data.slice(8,10)) || date.getHours() !== Number(row.horario.slice(0,2)) || date.getMinutes() !== Number(row.horario.slice(3,5)) ? null : date;
+  }
+  function isWorship(row) {
+    return typeof row.tipo === 'string' && row.tipo ? row.tipo.toLocaleLowerCase('pt-BR') === 'culto' : /\bculto\b/i.test(row.nome);
+  }
+  function upcoming(rows, now = new Date()) {
+    return rows.filter(row => !['Concluída','Cancelada'].includes(row.status) && scheduleDate(row) && scheduleDate(row) > now)
+      .sort((a,b) => scheduleDate(a) - scheduleDate(b) || a.nome.localeCompare(b.nome,'pt-BR'));
+  }
+  function overlaps(a, b) {
+    if (a.data !== b.data) return false;
+    if (a.horario === b.horario) return true;
+    // Sem horário final cadastrado, só é possível verificar inícios coincidentes.
+    if (a.horarioFim > a.horario && b.horarioFim > b.horario) return a.horario < b.horarioFim && b.horario < a.horarioFim;
+    return false;
+  }
+  function saveAvailability(input, now = new Date()) {
+    const data = load();
+    const member = data.membros.find(row => row.id === input.id_membro && row.status === 'Ativo');
+    const worship = upcoming(data.escalas, now).find(row => row.id === input.id_escala && isWorship(row));
+    if (!member) throw new Error('Selecione um membro ativo cadastrado.');
+    if (!worship) throw new Error('Este culto não está mais disponível. Atualize o calendário.');
+    if (worship.data !== input.data || worship.horario !== input.horario) throw new Error('A data ou o horário do culto mudou. Selecione-o novamente.');
+    const rows = loadAvailability();
+    const collision = rows.some(row => {
+      if (row.id_membro !== member.id || !row.disponivel || row.id_escala === worship.id) return false;
+      const other = data.escalas.find(item => item.id === row.id_escala);
+      return other && !['Concluída','Cancelada'].includes(other.status) && row.data === other.data && row.horario === other.horario && overlaps(worship, other);
+    });
+    if (collision) throw new Error('Você já informou disponibilidade para outro culto neste horário.');
+    const previous = rows.find(row => row.id_membro === member.id && row.id_escala === worship.id);
+    const record = {
+      id: previous?.id || crypto.randomUUID(), id_membro: member.id, id_usuario: null,
+      id_escala: worship.id, data: worship.data, horario: worship.horario,
+      disponivel: true, observacao: String(input.observacao || '').trim().slice(0,500),
+      origem: 'local', atualizadoEm: now.toISOString()
+    };
+    if (previous) rows[rows.indexOf(previous)] = record;
+    else rows.push(record);
+    localStorage.setItem(availabilityKey, JSON.stringify(rows));
+    publish(availabilityKey);
+    return record;
+  }
+  function cancelAvailability(id) {
+    const rows = loadAvailability();
+    const record = rows.find(row => row.id === id);
+    if (!record) throw new Error('Esta disponibilidade não foi encontrada. Atualize a listagem.');
+    record.disponivel = false;
+    record.atualizadoEm = new Date().toISOString();
+    localStorage.setItem(availabilityKey, JSON.stringify(rows));
+    publish(availabilityKey);
+  }
+  function reset() {
+    localStorage.setItem(dataKey, JSON.stringify(clone(app.seed)));
+    localStorage.removeItem(availabilityKey);
+    publish(dataKey);
+  }
+  function subscribe(listener) {
+    const onStorage = event => { if (!event.key || [dataKey, availabilityKey].includes(event.key)) listener(); };
+    const onLocal = () => listener();
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('ekklesia:storage', onLocal);
+    return () => { window.removeEventListener('storage', onStorage); window.removeEventListener('ekklesia:storage', onLocal); };
+  }
+  app.store = { dataKey, availabilityKey, load, saveModule, reset, loadAvailability, saveAvailability, cancelAvailability, subscribe };
+  app.schedule = { scheduleDate, isWorship, upcoming };
+})();

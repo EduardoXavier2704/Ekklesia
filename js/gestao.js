@@ -48,19 +48,16 @@
   const key = document.body.dataset.page;
   if (!key || !window.Ekklesia) return;
   const { schemas, seed } = window.Ekklesia;
-  const storageKey = 'ekklesia.demonstracao.v1';
+  const store = window.Ekklesia.store;
   let data = JSON.parse(JSON.stringify(seed));
-  try {
-    const stored = JSON.parse(localStorage.getItem(storageKey) || 'null');
-    // Aceita somente registros compatíveis com os campos desta versão.
-    if (stored && Object.keys(seed).every(module => Array.isArray(stored[module]) && stored[module].every(row =>
-      typeof row.id === 'string' && schemas[module].fields.every(([field, , type, options]) =>
-        type === 'number' ? Number.isFinite(row[field]) && row[field] >= 0 :
-        typeof row[field] === 'string' && (type !== 'select' || options.includes(row[field])))))) data = stored;
-  } catch { notify('Não foi possível ler os dados locais. Os exemplos foram carregados.'); }
+  try { data = store.load(); }
+  catch { notify('Não foi possível ler os dados locais. Os exemplos foram carregados apenas para visualização.'); }
   function persist() {
-    try { localStorage.setItem(storageKey, JSON.stringify(data)); return true; }
-    catch { notify('Alteração mantida apenas nesta página: o navegador não permitiu salvar os dados.'); return false; }
+    try {
+      if (key === 'configuracoes') store.reset();
+      else store.saveModule(key, data[key]);
+      return true;
+    } catch { notify('Não foi possível salvar a alteração. Verifique o armazenamento local antes de sair desta página.'); return false; }
   }
   const dialog = $('#record-dialog');
   $('[data-close]', dialog)?.addEventListener('click', () => dialog.close());
@@ -111,7 +108,7 @@
     delete: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg>'
   };
   function actions(row) {
-    return '<div class="actions">' + [['view','Visualizar'],['edit','Editar'],['delete','Excluir']].map(([action,title]) => '<button type="button" class="icon-button ' + (action==='delete'?'danger':'') + '" data-action="' + action + '" data-id="' + escape(row.id) + '" aria-label="' + title + ' ' + escape(row.nome) + '" title="' + title + '">' + icons[action] + '</button>').join('') + '</div>';
+    return '<div class="actions">' + (key === 'escalas' ? '<button type="button" class="button secondary availability-shortcut" data-availability-scale="'+escape(row.id)+'" aria-label="Ver disponibilidades de '+escape(row.nome)+'">Disponíveis</button>' : '') + [['view','Visualizar'],['edit','Editar'],['delete','Excluir']].map(([action,title]) => '<button type="button" class="icon-button ' + (action==='delete'?'danger':'') + '" data-action="' + action + '" data-id="' + escape(row.id) + '" aria-label="' + title + ' ' + escape(row.nome) + '" title="' + title + '">' + icons[action] + '</button>').join('') + '</div>';
   }
   function table(module, rows, target, withActions) {
     const columns = schemas[module].columns;
@@ -138,7 +135,7 @@
       catch { notify('O navegador não permitiu salvar as informações.'); }
     });
     form.elements.comunidade.addEventListener('input', () => form.elements.comunidade.setCustomValidity(''));
-    $('#reset-demo').onclick = () => confirmAction('Restaurar dados de exemplo', 'Todos os cadastros e alterações locais dos módulos serão substituídos pelos exemplos iniciais.', () => {
+    $('#reset-demo').onclick = () => confirmAction('Restaurar dados de exemplo', 'Todos os cadastros e alterações locais dos módulos serão substituídos pelos exemplos iniciais. As disponibilidades locais também serão removidas.', () => {
       data = JSON.parse(JSON.stringify(seed));
       if (persist()) notify('Dados demonstrativos restaurados.');
     });
@@ -237,7 +234,7 @@
     $('#cancel-form').onclick = () => dialog.close();
     $('#record-form').addEventListener('submit', event => {
       event.preventDefault();
-      const record = {id:row?.id || (Date.now().toString(36)+Math.random().toString(36).slice(2))};
+      const record = {...row, id:row?.id || (Date.now().toString(36)+Math.random().toString(36).slice(2))};
       const form = new FormData(event.target);
       for (const [field, , type] of schema.fields) record[field] = type==='number' ? Number(form.get(field)) : String(form.get(field)).trim();
       if (schema.fields.some(([field, , type])=>type!=='textarea'&&typeof record[field]==='string'&&!record[field])) { $('#form-error').textContent='Preencha os campos obrigatórios com informações válidas.'; return; }

@@ -122,3 +122,16 @@ dialog::backdrop { background: #152E2066; }
 
 .sidebar-logo > div { min-width: 0; }
 .sidebar-logo span { overflow-wrap: anywhere; }
+
+/* Consulta de disponibilidades restrita à tela de Escalas. */
+body[data-page="escalas"] .availability-heading { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
+body[data-page="escalas"] .availability-heading .context-note { margin-top: 10px; }
+body[data-page="escalas"] .availability-heading > a { flex-shrink: 0; }
+body[data-page="escalas"] .availability-shortcut { min-height: 34px; padding: 6px 8px; font-size: 11px; }
+body[data-page="escalas"] .availability-observation { min-width: 160px; max-width: 320px; white-space: pre-wrap; overflow-wrap: anywhere; }
+body[data-page="escalas"] .availability-footnote { margin-top: 16px; }
+body[data-page="escalas"] #availability-pagination { display: flex; align-items: center; gap: 10px; }
+body[data-page="escalas"] #availability-list-error { margin-bottom: 16px; }
+@media (max-width: 700px) {
+    body[data-page="escalas"] .availability-heading { flex-direction: column; margin-bottom: 20px; }
+}

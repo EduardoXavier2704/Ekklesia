@@ -596,3 +596,114 @@
     }
 
 }
+/* Evolução do Dashboard; seletores restritos para preservar as outras telas. */
+.dashboard-page .dashboard-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+.dashboard-page .dashboard-heading .page-heading { margin-bottom: 0; }
+.dashboard-page .dashboard-update { display: flex; align-items: center; gap: 20px; }
+.dashboard-page .dashboard-update strong { display: block; font-size: 12px; }
+.dashboard-page .dashboard-update span { display: block; margin-top: 5px; color: #66736A; font-size: 11px; line-height: 1.5; }
+.dashboard-page .dashboard-update .button { flex-shrink: 0; }
+.dashboard-page #dashboard-error { margin: 0 0 24px; }
+.dashboard-page .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.dashboard-page .stat-card { min-width: 0; }
+.dashboard-page .stat-icon { flex-shrink: 0; }
+.dashboard-page .dashboard-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+.dashboard-page .dashboard-card { min-width: 0; }
+.dashboard-page .card-header { align-items: center; flex-wrap: wrap; gap: 16px; }
+.dashboard-page .schedule-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; }
+.dashboard-page .schedule-actions a { white-space: nowrap; }
+.dashboard-page .schedule-date { flex: 0 0 44px; padding: 8px 0; border-radius: 6px; background: #F1F7F1; }
+.dashboard-page .schedule-item > div:nth-child(2) { min-width: 0; overflow-wrap: anywhere; }
+.dashboard-page .schedule-item .status { display: inline-flex; flex-shrink: 0; }
+.dashboard-page .schedule-item strong { font-size: 13px; }
+.dashboard-page .schedule-item .schedule-date strong { font-size: 19px; }
+.dashboard-page .availability-feedback { margin-top: 16px; padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.6; background: #E8F4E8; color: #315B3C; }
+.dashboard-page .agenda-note { font-size: 11px; color: #66736A; margin-top: 5px; }
+
+/* Campanhas */
+.dashboard-page .dashboard-carousel { display: block; position: relative; padding: 28px 54px 42px; }
+.dashboard-page .campaign-slide { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; align-items: center; min-height: 180px; }
+.dashboard-page .campaign-slide > div { min-width: 0; overflow-wrap: anywhere; }
+.dashboard-page .campaign-info h3 { font-size: 23px; }
+.dashboard-page .campaign-amount { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12px; }
+.dashboard-page .campaign-amount strong { font-size: 16px; }
+.dashboard-page #campaign-progress { height: 9px; margin: 12px 0; background: #417544; accent-color: #A7DCA5; }
+.dashboard-page #campaign-progress::-webkit-progress-bar { background: #417544; }
+.dashboard-page #campaign-progress::-webkit-progress-value { background: #A7DCA5; }
+.dashboard-page #campaign-progress::-moz-progress-bar { background: #A7DCA5; }
+.dashboard-page .campaign-stats { margin-top: 22px; gap: 20px; flex-wrap: wrap; }
+.dashboard-page .campaign-stats strong { font-size: 15px; }
+.dashboard-page .campaign-donation { display: flex; align-items: center; gap: 16px; border-left: 1px solid #ffffff30; padding-left: 22px; }
+.dashboard-page .campaign-donation p { color: #D9E7DA; font-size: 11px; line-height: 1.6; margin-bottom: 12px; }
+.dashboard-page .campaign-qr { flex: 0 0 96px; width: 96px; height: 96px; padding: 8px; border-radius: 6px; background: #fff; color: #66736A; display: flex; align-items: center; justify-content: center; text-align: center; }
+.dashboard-page .campaign-qr img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.dashboard-page #campaign-qr-placeholder { font-size: 11px; line-height: 1.6; }
+.dashboard-page .donate-button { background: #E8F4E8; color: #164C27; border: none; font-size: 12px; padding: 10px 12px; white-space: nowrap; }
+.dashboard-page .donate-button:disabled { opacity: .65; }
+.dashboard-page .carousel-arrow { position: absolute; top: calc(50% - 18px); width: 32px; height: 32px; border-radius: 50%; background: #ffffff25; color: white; border: 1px solid #ffffff30; font-size: 26px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+.dashboard-page .carousel-arrow:hover:not(:disabled) { background: #ffffff40; }
+.dashboard-page .carousel-arrow.previous { left: 12px; }
+.dashboard-page .carousel-arrow.next { right: 12px; }
+.dashboard-page .carousel-dots { display: flex; justify-content: center; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); }
+.dashboard-page .carousel-dots button { width: 28px; height: 28px; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.dashboard-page .carousel-dots button::after { content: ''; width: 7px; height: 7px; border: 1px solid #E8F4E8; border-radius: 50%; }
+.dashboard-page .carousel-dots button[aria-pressed="true"]::after { background: #E8F4E8; }
+.dashboard-page .campaign-enter { animation: dashboard-fade .18s ease-out; }
+@keyframes dashboard-fade { from { opacity: .45; transform: translateX(5px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Calendário de disponibilidade */
+.dashboard-page #availability-dialog { width: min(420px, calc(100% - 24px)); padding: 22px; max-height: calc(100dvh - 32px); }
+.dashboard-page #availability-dialog .dialog-heading { margin-bottom: 14px; }
+.dashboard-page #availability-title { font-size: 22px; }
+.dashboard-page .availability-month { display: flex; align-items: center; justify-content: space-between; margin: 16px 0 10px; }
+.dashboard-page .availability-month h3 { font-size: 15px; text-transform: capitalize; }
+.dashboard-page .availability-weekdays, .dashboard-page .availability-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.dashboard-page .availability-weekdays span { font-size: 10px; color: #66736A; text-align: center; padding: 6px 0; }
+.dashboard-page .availability-days button { aspect-ratio: 1; min-width: 0; border: 1px solid transparent; border-radius: 50%; background: #EDF5E8; color: #1B5E20; font-size: 12px; cursor: pointer; }
+.dashboard-page .availability-days button:disabled { background: transparent; color: #748071; opacity: .55; cursor: default; }
+.dashboard-page .availability-days button[aria-pressed="true"] { background: #1B5E20; color: #fff; }
+.dashboard-page .availability-days button[aria-current="date"] { border-color: #699D72; }
+.dashboard-page #calendar-help { margin: 12px 0; }
+.dashboard-page .observation-label { margin-top: 14px; }
+.dashboard-page #availability-observation { min-height: 64px; }
+.dashboard-page .confirm-availability { width: 100%; margin-top: 16px; }
+.dashboard-page #availability-history { margin: 14px 0 0; }
+@media (max-width: 1250px) {
+    .dashboard-page .dashboard-heading { align-items: flex-start; }
+    .dashboard-page .dashboard-update { align-items: flex-end; flex-direction: column; gap: 10px; }
+    .dashboard-page .campaign-slide { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+    .dashboard-page .campaign-donation { grid-column: 1 / -1; border-left: 0; border-top: 1px solid #ffffff30; padding: 20px 0 0; }
+    .dashboard-page .campaign-qr { flex-basis: 88px; width: 88px; height: 88px; }
+}
+@media (max-width: 1100px) {
+    .dashboard-page .stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .dashboard-page .dashboard-grid { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 700px) {
+    .dashboard-page .dashboard-heading { flex-direction: column; }
+    .dashboard-page .dashboard-update { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
+    .dashboard-page .stat-card { padding: 16px 12px; gap: 10px; }
+    .dashboard-page .stat-icon { width: 32px; height: 32px; }
+    .dashboard-page .dashboard-card { padding: 18px; }
+    .dashboard-page .schedule-actions { width: 100%; justify-content: space-between; gap: 10px; }
+    .dashboard-page .schedule-item { flex-wrap: wrap; gap: 10px; }
+    .dashboard-page .schedule-item .status { margin-left: 54px; }
+    .dashboard-page .dashboard-carousel { padding: 24px 42px 42px; }
+    .dashboard-page .campaign-slide { grid-template-columns: minmax(0,1fr); gap: 24px; }
+    .dashboard-page .campaign-donation { grid-column: auto; gap: 12px; }
+    .dashboard-page .carousel-arrow.previous { left: 6px; }
+    .dashboard-page .carousel-arrow.next { right: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .dashboard-page .campaign-enter { animation: none; } }
+
+@media (max-width: 400px) {
+    .dashboard-page .campaign-donation { flex-wrap: wrap; }
+}
+
+.dashboard-page .availability-feedback a { color: #164C27; text-decoration: underline; }

@@ -11,6 +11,7 @@
 </script>
 <script src="../js/gestao.js" defer>
 </script>
+<script src="../js/disponibilidades.js" defer></script>
 </head>
 <body data-page="escalas">
 <a class="skip-link" href="#page-content">Ir para o conteúdo</a>
@@ -149,6 +150,11 @@
 <p class="demo-notice">Demonstração • dados fictícios, salvos apenas neste navegador. Utilize informações de teste.</p>
 <div class="stats-grid" id="module-stats" aria-label="Indicadores">
 </div>
+<div class="status-tabs" role="group" aria-label="Visualização de Escalas">
+<button type="button" id="show-schedules" aria-pressed="true" aria-controls="schedules-view">Escalas</button>
+<button type="button" id="show-availabilities" aria-pressed="false" aria-controls="availabilities-view">Disponibilidades</button>
+</div>
+<div id="schedules-view">
 <form class="filters" id="filters" role="search">
 <div class="search-field">
 <label for="search">Buscar</label>
@@ -180,6 +186,35 @@
 </section>
 <section id="calendar" class="table-panel" hidden aria-label="Calendário de escalas">
 </section>
+</div>
+<section id="availabilities-view" aria-labelledby="availabilities-title" hidden>
+    <div class="availability-heading">
+        <div><h3 id="availabilities-title">Disponibilidades dos membros</h3><p class="context-note">Consulte quem informou disponibilidade para cada escala. Disponibilidade não significa que o membro já foi escalado.</p></div>
+        <a class="button secondary" href="inicio.html">Registrar no Início</a>
+    </div>
+    <form class="filters" id="availability-filters" role="search" aria-label="Filtrar disponibilidades">
+        <div class="search-field"><label for="availability-search">Membro ou observação</label><input type="search" id="availability-search" placeholder="Buscar por nome, ministério ou observação…"></div>
+        <div class="filter-fields">
+            <div><label for="availability-scale-filter">Escala / culto</label><select id="availability-scale-filter"><option value="">Todas as escalas</option></select></div>
+            <div><label for="availability-state-filter">Situação</label><select id="availability-state-filter"><option value="">Todas</option><option value="available">Disponível</option><option value="cancelled">Cancelada</option><option value="changed">Reconfirmar</option><option value="past">Data passada</option><option value="unavailable">Cadastro indisponível</option></select></div>
+        </div>
+        <button type="reset" class="button secondary">Limpar filtros</button>
+    </form>
+    <p id="availability-scale-summary" class="context-note" aria-live="polite"></p>
+    <p id="availability-list-error" class="form-error" role="alert" hidden></p>
+    <section class="table-panel" aria-label="Lista de disponibilidades">
+        <div class="table-scroll">
+            <table id="availabilities-table">
+                <caption class="sr-only">Membros e suas disponibilidades por escala</caption>
+                <thead><tr><th scope="col">Membro</th><th scope="col">Escala / culto</th><th scope="col">Data e horário informados</th><th scope="col">Ministério do membro</th><th scope="col">Observação</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="table-footer"><p id="availability-result-count" aria-live="polite"></p><nav id="availability-pagination" aria-label="Paginação das disponibilidades"></nav></div>
+    </section>
+    <p class="context-note availability-footnote">Registros locais deste navegador. O ministério vem do cadastro do membro; uma função específica ainda não é definida na disponibilidade.</p>
+</section>
+
 </section>
 </main>
 </div>
