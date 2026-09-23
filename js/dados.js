@@ -864,6 +864,24 @@ window.Ekklesia = {
   function loadMemberView() {
     memberSession();
     const data = load();
+    // Escala demonstrativa para testar a agenda sem cadastro pelo administrador.
+    if (!data.escalas.some(row => row.id === 'escala-demo-disponibilidade')) {
+      const date = new Date();
+      date.setDate(date.getDate() + (7 - date.getDay()));
+      const dateKey = date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
+      data.escalas.push({
+        id: 'escala-demo-disponibilidade',
+        nome: 'Culto de Domingo — Teste de disponibilidade',
+        ministerio: 'Geral',
+        data: dateKey,
+        horario: '18:30',
+        local: 'Templo Principal',
+        servicos: 5,
+        status: 'Agendada',
+        equipe: ''
+      });
+      localStorage.setItem(dataKey, JSON.stringify(validate(data)));
+    }
     data.membros = data.membros.map(({id,nome,ministerio,celula,status}) => ({id,nome,ministerio,celula,status}));
     return data;
   }
