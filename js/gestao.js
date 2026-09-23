@@ -1,6 +1,7 @@
 /* Interações locais do protótipo. Não realiza autenticação nem chamadas a APIs. */
 (() => {
   'use strict';
+  if (!window.Ekklesia.access.requireRole('admin')) return;
   const $ = (selector, parent = document) => parent.querySelector(selector);
   const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -14,37 +15,7 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { toast.hidden = true; }, 6500);
   }
-  const layout = $('.layout');
-  const menu = $('.menu-button');
-  const mobile = matchMedia('(max-width: 700px)');
-  function syncMenu() {
-    layout?.classList.remove('menu-open', 'menu-collapsed');
-    menu?.setAttribute('aria-expanded', String(!mobile.matches));
-  }
-  syncMenu();
-  mobile.addEventListener('change', syncMenu);
-  menu?.addEventListener('click', () => {
-    const open = mobile.matches ? layout.classList.toggle('menu-open') : !layout.classList.toggle('menu-collapsed');
-    menu.setAttribute('aria-expanded', String(open));
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && mobile.matches) {
-      layout?.classList.remove('menu-open');
-      menu?.setAttribute('aria-expanded', 'false');
-    }
-  });
-  document.addEventListener('click', event => {
-    if (mobile.matches && layout?.classList.contains('menu-open') && !event.target.closest('.sidebar, .menu-button')) {
-      layout.classList.remove('menu-open');
-      menu.setAttribute('aria-expanded', 'false');
-    }
-  });
-  $('.notification-button')?.addEventListener('click', () => notify('Não há notificações nesta demonstração.'));
   const settingsKey = 'ekklesia.apresentacao.v1';
-  try {
-    const settings = JSON.parse(localStorage.getItem(settingsKey) || '{}');
-    if (settings.comunidade) $('.sidebar-logo span').textContent = settings.comunidade;
-  } catch { /* Mantém a identificação padrão quando o armazenamento não está disponível. */ }
   const key = document.body.dataset.page;
   if (!key || !window.Ekklesia) return;
   const { schemas, seed } = window.Ekklesia;
@@ -64,17 +35,18 @@
   const date = value => /^\d{4}-\d{2}-\d{2}$/.test(value) ? value.split('-').reverse().join('/') : '—';
   const number = value => Number(value).toLocaleString('pt-BR');
   const sum = (rows, field) => rows.reduce((total, row) => total + Number(row[field] || 0), 0);
+  const cardIcons = {"membros":"<svg class=\"dashboard-icon\" viewBox=\"355 420 545 445\" aria-hidden=\"true\" focusable=\"false\"><image href=\"../../assets/membros.png\" width=\"1280\" height=\"1280\"/></svg>","ministerios":"<svg class=\"dashboard-icon\" viewBox=\"355 385 545 520\" aria-hidden=\"true\" focusable=\"false\"><image href=\"../../assets/ministerios.png\" width=\"1280\" height=\"1280\"/></svg>","celulas":"<svg class=\"dashboard-icon\" viewBox=\"355 400 545 465\" aria-hidden=\"true\" focusable=\"false\"><image href=\"../../assets/celulas.png\" width=\"1280\" height=\"1280\"/></svg>","escalas":"<svg class=\"dashboard-icon\" viewBox=\"370 380 515 505\" aria-hidden=\"true\" focusable=\"false\"><image href=\"../../assets/escalas.png\" width=\"1280\" height=\"1280\"/></svg>","campanhas":"<svg class=\"dashboard-icon\" viewBox=\"330 390 605 500\" aria-hidden=\"true\" focusable=\"false\"><image href=\"../../assets/campanhas.png\" width=\"1280\" height=\"1280\"/></svg>","notificacoes":"<svg class=\"dashboard-icon\" viewBox=\"390 380 500 495\" aria-hidden=\"true\" focusable=\"false\"><image href=\"../../assets/notificacoes.png\" width=\"1280\" height=\"1280\"/></svg>"};
   function cards(items) {
-    return items.map(([value, label, note, icon]) => '<div class="stat-card"><span class="stat-icon" aria-hidden="true">' + icon + '</span><div><strong>' + escape(value) + '</strong><span>' + label + '</span><small>' + note + '</small></div></div>').join('');
+    return items.map(([value, label, note, icon]) => '<div class="stat-card"><span class="stat-icon" aria-hidden="true">' + cardIcons[icon] + '</span><div><strong>' + escape(value) + '</strong><span>' + label + '</span><small>' + note + '</small></div></div>').join('');
   }
   function stats(module) {
     const rows = data[module];
     const active = rows.filter(row => ['Ativo','Ativa','Em andamento'].includes(row.status)).length;
-    if (module === 'membros') return [[rows.length,'Membros','Total de registros locais','♙'],[active,'Ativos','Na listagem de membros','✓'],[rows.length-active,'Inativos','Na listagem de membros','○'],[new Set(rows.map(r=>r.ministerio)).size,'Ministérios representados','Nos registros de membros','♧']];
-    if (module === 'ministerios') return [[rows.length,'Ministérios','Total cadastrados','♧'],[number(sum(rows,'membros')),'Vínculos informados','Contagem manual dos grupos','♙'],[active,'Ativos','Ministérios em atividade','✓'],[new Set(rows.map(r=>r.area)).size,'Áreas','Áreas de atuação','▤']];
-    if (module === 'celulas') return [[rows.length,'Células','Total cadastradas','♧'],[number(sum(rows,'participantes')),'Participações informadas','Contagem manual dos grupos','♙'],[new Set(rows.map(r=>r.lider)).size,'Líderes','Líderes distintos','♙'],[active,'Células ativas','Na listagem de células','✓']];
-    if (module === 'escalas') return [[rows.length,'Escalas','Total cadastradas','▦'],[number(sum(rows,'servicos')),'Serviços previstos','Informados manualmente','♙'],[rows.filter(r=>r.status==='Agendada').length,'Agendadas','Aguardando realização','▦'],[rows.filter(r=>r.status==='Pendente').length,'Pendentes','Precisam de atenção','○']];
-    return [[rows.length,'Campanhas','Total cadastradas','♡'],[active,'Em andamento','Campanhas ativas','▣'],[rows.filter(r=>r.status==='Concluída').length,'Concluídas','Campanhas finalizadas','✓'],[rows.filter(r=>r.status==='Planejada').length,'Planejadas','A iniciar','○']];
+    if (module === 'membros') return [[rows.length,'Membros','Total de registros locais','membros'],[active,'Ativos','Na listagem de membros','membros'],[rows.length-active,'Inativos','Na listagem de membros','membros'],[new Set(rows.map(r=>r.ministerio)).size,'Ministérios representados','Nos registros de membros','ministerios']];
+    if (module === 'ministerios') return [[rows.length,'Ministérios','Total cadastrados','ministerios'],[number(sum(rows,'membros')),'Vínculos informados','Contagem manual dos grupos','membros'],[active,'Ativos','Ministérios em atividade','ministerios'],[new Set(rows.map(r=>r.area)).size,'Áreas','Áreas de atuação','ministerios']];
+    if (module === 'celulas') return [[rows.length,'Células','Total cadastradas','celulas'],[number(sum(rows,'participantes')),'Participações informadas','Contagem manual dos grupos','membros'],[new Set(rows.map(r=>r.lider)).size,'Líderes','Líderes distintos','membros'],[active,'Células ativas','Na listagem de células','celulas']];
+    if (module === 'escalas') return [[rows.length,'Escalas','Total cadastradas','escalas'],[number(sum(rows,'servicos')),'Serviços previstos','Informados manualmente','membros'],[rows.filter(r=>r.status==='Agendada').length,'Agendadas','Aguardando realização','escalas'],[rows.filter(r=>r.status==='Pendente').length,'Pendentes','Precisam de atenção','notificacoes']];
+    return [[rows.length,'Campanhas','Total cadastradas','campanhas'],[active,'Em andamento','Campanhas ativas','campanhas'],[rows.filter(r=>r.status==='Concluída').length,'Concluídas','Campanhas finalizadas','campanhas'],[rows.filter(r=>r.status==='Planejada').length,'Planejadas','A iniciar','campanhas']];
   }
   function label(module, field) {
     if (field === 'periodo') return 'Período';

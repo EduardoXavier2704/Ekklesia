@@ -3,16 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekklesia | Células</title>
-<link rel="stylesheet" href="../css/global.css">
-<link rel="stylesheet" href="../css/inicio.css">
-<link rel="stylesheet" href="../css/gestao.css">
-<script src="../js/dados.js" defer>
+<title>Ekklesia | Ministérios</title>
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/inicio.css">
+<link rel="stylesheet" href="../../css/gestao.css">
+<script src="../../js/dados.js" defer>
 </script>
-<script src="../js/gestao.js" defer>
+<script src="../../js/acesso.js" defer></script>
+<script src="../../js/interface.js" defer></script>
+<script src="../../js/gestao.js" defer>
 </script>
 </head>
-<body data-page="celulas">
+<body data-role="admin" data-page="ministerios">
 <a class="skip-link" href="#page-content">Ir para o conteúdo</a>
     <div class="layout">
 
@@ -20,7 +22,7 @@
         <aside class="sidebar" id="sidebar">
 
             <div class="sidebar-logo">
-                <img src="../assets/logo.jpeg" alt="Logo Ekklesia">
+                <img src="../../assets/logo.jpeg" alt="Logo Ekklesia">
 
                 <div>
                     <h1>EKKLESIA</h1>
@@ -31,42 +33,42 @@
             <nav class="sidebar-menu" aria-label="Navegação principal">
 
                 <a href="inicio.html" class="menu-item">
-                    <span>⌂</span>
+                    <svg class="navigation-icon" viewBox="380 410 495 465" aria-hidden="true" focusable="false"><image href="../../assets/inicio.png" width="1280" height="1280"/></svg>
                     Início
                 </a>
 
                 <a href="membros.html" class="menu-item">
-                    <span>♙</span>
+                    <svg class="navigation-icon" viewBox="355 420 545 445" aria-hidden="true" focusable="false"><image href="../../assets/membros.png" width="1280" height="1280"/></svg>
                     Membros
                 </a>
 
-                <a href="ministerios.html" class="menu-item">
-                    <span>♧</span>
+                <a href="ministerios.html" class="menu-item active" aria-current="page">
+                    <svg class="navigation-icon" viewBox="355 385 545 520" aria-hidden="true" focusable="false"><image href="../../assets/ministerios.png" width="1280" height="1280"/></svg>
                     Ministérios
                 </a>
 
-                <a href="celulas.html" class="menu-item active" aria-current="page">
-                    <span>♧</span>
+                <a href="celulas.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="355 400 545 465" aria-hidden="true" focusable="false"><image href="../../assets/celulas.png" width="1280" height="1280"/></svg>
                     Células
                 </a>
 
                 <a href="escalas.html" class="menu-item">
-                    <span>▦</span>
+                    <svg class="navigation-icon" viewBox="370 380 515 505" aria-hidden="true" focusable="false"><image href="../../assets/escalas.png" width="1280" height="1280"/></svg>
                     Escalas
                 </a>
 
                 <a href="campanhas.html" class="menu-item">
-                    <span>♡</span>
+                    <svg class="navigation-icon" viewBox="330 390 605 500" aria-hidden="true" focusable="false"><image href="../../assets/campanhas.png" width="1280" height="1280"/></svg>
                     Campanhas
                 </a>
 
                 <a href="relatorios.html" class="menu-item">
-                    <span>▤</span>
+                    <svg class="navigation-icon" viewBox="390 375 475 545" aria-hidden="true" focusable="false"><image href="../../assets/relatorios.png" width="1280" height="1280"/></svg>
                     Relatórios
                 </a>
 
                 <a href="configuracoes.html" class="menu-item">
-                    <span>⚙</span>
+                    <svg class="navigation-icon" viewBox="325 320 605 630" aria-hidden="true" focusable="false"><image href="../../assets/configuracoes.png" width="1280" height="1280"/></svg>
                     Configurações
                 </a>
 
@@ -74,8 +76,8 @@
 
             <div class="sidebar-footer">
 
-                <a href="login.html" class="menu-item">
-                    <span>➜</span>
+                <a href="../login.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="390 395 490 535" aria-hidden="true" focusable="false"><image href="../../assets/saida.png" width="1280" height="1280"/></svg>
                     Sair
                 </a>
 
@@ -99,7 +101,7 @@
                         ☰
                     </button>
 
-                    <span>Células</span>
+                    <span>Ministérios</span>
 
                 </div>
 
@@ -108,9 +110,7 @@
                 <div class="topbar-right">
 
                     <!-- NOTIFICAÇÕES -->
-                    <button class="notification-button" type="button" aria-label="Notificações">
-                        ♧
-                    </button>
+                    <button class="notification-button" type="button" aria-label="Notificações"><svg class="navigation-icon" viewBox="390 380 500 495" aria-hidden="true" focusable="false"><image href="../../assets/notificacoes.png" width="1280" height="1280"/></svg></button>
 
 
                     <!-- PERFIL -->
@@ -138,11 +138,11 @@
 <div class="page-heading module-heading">
 <div>
 <span class="eyebrow">GESTÃO DA COMUNIDADE</span>
-<h2>Células</h2>
-<p>Gerencie as células e seus participantes.</p>
+<h2>Ministérios</h2>
+<p>Gerencie os ministérios da sua comunidade.</p>
 </div>
 <div class="heading-actions">
-<button type="button" class="button" id="add-record">＋ Nova Célula</button>
+<button type="button" class="button" id="add-record">＋ Novo Ministério</button>
 </div>
 </div>
 <p class="demo-notice">Demonstração • dados fictícios, salvos apenas neste navegador. Utilize informações de teste.</p>
@@ -157,10 +157,10 @@
 </div>
 <button class="button secondary" type="reset">Limpar filtros</button>
 </form>
-<section class="table-panel" aria-label="Listagem de células">
+<section class="table-panel" aria-label="Listagem de ministérios">
 <div class="table-scroll">
 <table id="records-table">
-<caption class="sr-only">Células da comunidade — dados demonstrativos</caption>
+<caption class="sr-only">Ministérios da comunidade — dados demonstrativos</caption>
 <thead>
 </thead>
 <tbody>

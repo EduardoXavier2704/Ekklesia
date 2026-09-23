@@ -7,15 +7,18 @@
 
     <title>Ekklesia | Início</title>
 
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/inicio.css">
-    <link rel="stylesheet" href="../css/gestao.css">
-    <script src="../js/dados.js" defer></script>
-    <script src="../js/gestao.js" defer></script>
-    <script src="../js/inicio.js" defer></script>
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/inicio.css">
+    <link rel="stylesheet" href="../../css/gestao.css">
+    <script src="../../js/dados.js" defer></script>
+<script src="../../js/acesso.js" defer></script>
+<script src="../../js/interface.js" defer></script>
+    <script src="../../js/gestao.js" defer></script>
+    <script src="../../js/campanhas.js" defer></script>
+<script src="../../js/inicio.js" defer></script>
 </head>
 
-<body class="dashboard-page">
+<body data-role="admin" class="dashboard-page">
 
     <div class="layout">
 
@@ -23,7 +26,7 @@
         <aside class="sidebar" id="sidebar">
 
             <div class="sidebar-logo">
-                <img src="../assets/logo.jpeg" alt="Logo Ekklesia">
+                <img src="../../assets/logo.jpeg" alt="Logo Ekklesia">
 
                 <div>
                     <h1>EKKLESIA</h1>
@@ -34,42 +37,42 @@
             <nav class="sidebar-menu">
 
                 <a href="inicio.html" class="menu-item active">
-                    <span>⌂</span>
+                    <svg class="navigation-icon" viewBox="380 410 495 465" aria-hidden="true" focusable="false"><image href="../../assets/inicio.png" width="1280" height="1280"/></svg>
                     Início
                 </a>
 
                 <a href="membros.html" class="menu-item">
-                    <span>♙</span>
+                    <svg class="navigation-icon" viewBox="355 420 545 445" aria-hidden="true" focusable="false"><image href="../../assets/membros.png" width="1280" height="1280"/></svg>
                     Membros
                 </a>
 
                 <a href="ministerios.html" class="menu-item">
-                    <span>♧</span>
+                    <svg class="navigation-icon" viewBox="355 385 545 520" aria-hidden="true" focusable="false"><image href="../../assets/ministerios.png" width="1280" height="1280"/></svg>
                     Ministérios
                 </a>
 
                 <a href="celulas.html" class="menu-item">
-                    <span>♧</span>
+                    <svg class="navigation-icon" viewBox="355 400 545 465" aria-hidden="true" focusable="false"><image href="../../assets/celulas.png" width="1280" height="1280"/></svg>
                     Células
                 </a>
 
                 <a href="escalas.html" class="menu-item">
-                    <span>▦</span>
+                    <svg class="navigation-icon" viewBox="370 380 515 505" aria-hidden="true" focusable="false"><image href="../../assets/escalas.png" width="1280" height="1280"/></svg>
                     Escalas
                 </a>
 
                 <a href="campanhas.html" class="menu-item">
-                    <span>♡</span>
+                    <svg class="navigation-icon" viewBox="330 390 605 500" aria-hidden="true" focusable="false"><image href="../../assets/campanhas.png" width="1280" height="1280"/></svg>
                     Campanhas
                 </a>
 
                 <a href="relatorios.html" class="menu-item">
-                    <span>▤</span>
+                    <svg class="navigation-icon" viewBox="390 375 475 545" aria-hidden="true" focusable="false"><image href="../../assets/relatorios.png" width="1280" height="1280"/></svg>
                     Relatórios
                 </a>
 
                 <a href="configuracoes.html" class="menu-item">
-                    <span>⚙</span>
+                    <svg class="navigation-icon" viewBox="325 320 605 630" aria-hidden="true" focusable="false"><image href="../../assets/configuracoes.png" width="1280" height="1280"/></svg>
                     Configurações
                 </a>
 
@@ -77,8 +80,8 @@
 
             <div class="sidebar-footer">
 
-                <a href="login.html" class="menu-item">
-                    <span>➜</span>
+                <a href="../login.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="390 395 490 535" aria-hidden="true" focusable="false"><image href="../../assets/saida.png" width="1280" height="1280"/></svg>
                     Sair
                 </a>
 
@@ -111,9 +114,7 @@
                 <div class="topbar-right">
 
                     <!-- NOTIFICAÇÕES -->
-                    <button class="notification-button" type="button" aria-label="Notificações">
-                        ♧
-                    </button>
+                    <button class="notification-button" type="button" aria-label="Notificações"><svg class="navigation-icon" viewBox="390 380 500 495" aria-hidden="true" focusable="false"><image href="../../assets/notificacoes.png" width="1280" height="1280"/></svg></button>
 
 
                     <!-- PERFIL -->
@@ -165,7 +166,7 @@
                 <div class="stats-grid">
 
                     <div class="stat-card">
-                        <span class="stat-icon">♙</span>
+                        <span class="stat-icon"><svg class="dashboard-icon" viewBox="355 420 545 445" aria-hidden="true" focusable="false"><image href="../../assets/membros.png" width="1280" height="1280"/></svg></span>
 
                         <div>
                             <span>Membros</span>
@@ -174,7 +175,7 @@
                     </div>
 
                     <div class="stat-card">
-                        <span class="stat-icon">♧</span>
+                        <span class="stat-icon"><svg class="dashboard-icon" viewBox="355 385 545 520" aria-hidden="true" focusable="false"><image href="../../assets/ministerios.png" width="1280" height="1280"/></svg></span>
 
                         <div>
                             <span>Ministérios</span>
@@ -183,7 +184,7 @@
                     </div>
 
                     <div class="stat-card">
-                        <span class="stat-icon">♧</span>
+                        <span class="stat-icon"><svg class="dashboard-icon" viewBox="355 400 545 465" aria-hidden="true" focusable="false"><image href="../../assets/celulas.png" width="1280" height="1280"/></svg></span>
 
                         <div>
                             <span>Células</span>
@@ -192,7 +193,7 @@
                     </div>
 
                     <div class="stat-card">
-                        <span class="stat-icon">▦</span>
+                        <span class="stat-icon"><svg class="dashboard-icon" viewBox="370 380 515 505" aria-hidden="true" focusable="false"><image href="../../assets/escalas.png" width="1280" height="1280"/></svg></span>
 
                         <div>
                             <span>Escalas</span>
@@ -211,13 +212,12 @@
                         <div class="card-header">
                             <div><small>ORGANIZAÇÃO</small><h3 id="upcoming-title">Próximas escalas</h3></div>
                             <div class="schedule-actions">
-                                <button type="button" class="button secondary" id="open-availability" aria-haspopup="dialog" aria-controls="availability-dialog">▦ Selecionar data</button>
+                                
                                 <a href="escalas.html">Ver todas</a>
                             </div>
                         </div>
-                        <p class="context-note">Selecione a data em que tem disponibilidade para servir em um culto.</p>
+                        <p class="context-note">Resumo dos próximos cultos. Consulte as disponibilidades dos membros na tela Escalas.</p>
                         <div id="upcoming-schedules" aria-live="polite"><p class="context-note">Carregando escalas…</p></div>
-                        <p id="availability-feedback" class="availability-feedback" role="status" hidden></p>
                     </section>
 
                     <!-- EVENTOS -->
@@ -235,7 +235,7 @@
 
 
                         <div class="event-item">
-                            <span class="event-icon">▣</span>
+                            <span class="event-icon"><svg class="dashboard-icon" viewBox="370 380 515 505" aria-hidden="true" focusable="false"><image href="../../assets/escalas.png" width="1280" height="1280"/></svg></span>
 
                             <div>
                                 <strong>Culto de Domingo</strong>
@@ -245,7 +245,7 @@
 
 
                         <div class="event-item">
-                            <span class="event-icon">▣</span>
+                            <span class="event-icon"><svg class="dashboard-icon" viewBox="355 420 545 445" aria-hidden="true" focusable="false"><image href="../../assets/membros.png" width="1280" height="1280"/></svg></span>
 
                             <div>
                                 <strong>Reunião de Líderes</strong>
@@ -255,7 +255,7 @@
 
 
                         <div class="event-item">
-                            <span class="event-icon">▣</span>
+                            <span class="event-icon"><svg class="dashboard-icon" viewBox="355 400 545 465" aria-hidden="true" focusable="false"><image href="../../assets/celulas.png" width="1280" height="1280"/></svg></span>
 
                             <div>
                                 <strong>Encontro de Células</strong>
@@ -307,25 +307,7 @@
 
     </div>
 
-<dialog id="availability-dialog" aria-labelledby="availability-title" aria-describedby="availability-note">
-    <div class="dialog-heading"><h2 id="availability-title">Selecionar data</h2><button type="button" class="icon-button" id="close-availability" aria-label="Fechar calendário">×</button></div>
-    <p class="context-note" id="availability-note">Escolha o membro para este registro local. A identificação automática dependerá do login do sistema.</p>
-    <form id="availability-form">
-        <label for="availability-member">Membro</label>
-        <select id="availability-member" required><option value="">Selecione seu cadastro</option></select>
-        <div class="availability-month"><button type="button" class="icon-button" id="previous-month" aria-label="Mês anterior">‹</button><h3 id="availability-month-title" aria-live="polite"></h3><button type="button" class="icon-button" id="next-month" aria-label="Próximo mês">›</button></div>
-        <div class="availability-weekdays" aria-hidden="true"><span>DOM</span><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span></div>
-        <div class="availability-days" id="availability-days" role="group" aria-label="Datas de cultos disponíveis"></div>
-        <p class="context-note" id="calendar-help">Selecione um dia com culto cadastrado.</p>
-        <label for="availability-worship">Culto e horário</label>
-        <select id="availability-worship" required disabled><option value="">Selecione uma data</option></select>
-        <label for="availability-observation" class="observation-label">Observação (opcional)</label>
-        <textarea id="availability-observation" rows="2" maxlength="500" placeholder="Informe alguma observação sobre sua disponibilidade"></textarea>
-        <p class="form-error" id="availability-error" role="alert"></p>
-        <button type="submit" class="button confirm-availability" id="confirm-availability" disabled>Confirmar disponibilidade</button>
-        <p id="availability-history" class="context-note" aria-live="polite"></p>
-    </form>
-</dialog>
+
 <noscript><p class="demo-notice">Ative o JavaScript para carregar os dados do Dashboard.</p></noscript>
 <div id="toast" role="status" aria-live="polite" hidden></div>
 </body>

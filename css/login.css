@@ -240,3 +240,7 @@ footer {
     }
 
 }
+.form-group select { width:100%; padding:14px; border:1px solid #ddd; border-radius:8px; background:white; font:inherit; color:#173d22; }
+.login-note { line-height:1.5; margin:16px 0; color:#5d695f; font-size:14px; }
+#login-error { color:#a32626; margin:12px 0; }
+[hidden] { display:none !important; }

@@ -1,0 +1,13 @@
+.member-page .page-heading { gap: 20px; flex-wrap: wrap; }
+.member-page .member-tabs { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+.member-tabs [aria-pressed="true"] { background: #1b5e20; color: white; }
+.member-page .stats-grid { margin-bottom: 24px; }
+.member-page .stat-card small { display:block; color:#6b7280; margin-top:6px; }
+.member-page .dashboard-carousel { margin:24px 0; }
+.member-page .schedule-item { gap:14px; }
+.member-page .schedule-item > div:nth-child(2) { flex:1; min-width:0; }
+.member-page #member-error { color:#a32626; padding:12px; }
+.member-page #member-detail { width:min(560px,calc(100vw - 32px)); }
+.member-page #detail-content p { margin:12px 0; overflow-wrap:anywhere; }
+.member-page #member-pagination { display:flex; gap:8px; }
+@media(max-width:700px) { .member-page .page-heading .button { width:100%; } .member-page .schedule-item { flex-wrap:wrap; } }

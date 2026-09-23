@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekklesia | Membros</title>
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/inicio.css">
+<link rel="stylesheet" href="../../css/gestao.css">
+
+
+<link rel="stylesheet" href="../../css/membro.css">
+<script src="../../js/dados.js" defer></script>
+<script src="../../js/acesso.js" defer></script>
+<script src="../../js/interface.js" defer></script>
+<script src="../../js/membro.js" defer></script>
+</head>
+<body data-role="member" data-page="membros" class="dashboard-page member-page">
+<a class="skip-link" href="#page-content">Ir para o conteúdo</a>
+    <div class="layout">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-logo">
+                <img src="../../assets/logo.jpeg" alt="Logo Ekklesia">
+
+                <div>
+                    <h1>EKKLESIA</h1>
+                    <span>Gestão para Comunidades</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Navegação principal">
+
+                <a href="inicio.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="380 410 495 465" aria-hidden="true" focusable="false"><image href="../../assets/inicio.png" width="1280" height="1280"/></svg>
+                    Início
+                </a>
+
+                <a href="membros.html" class="menu-item active" aria-current="page">
+                    <svg class="navigation-icon" viewBox="355 420 545 445" aria-hidden="true" focusable="false"><image href="../../assets/membros.png" width="1280" height="1280"/></svg>
+                    Membros
+                </a>
+
+                <a href="ministerios.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="355 385 545 520" aria-hidden="true" focusable="false"><image href="../../assets/ministerios.png" width="1280" height="1280"/></svg>
+                    Ministérios
+                </a>
+
+                <a href="celulas.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="355 400 545 465" aria-hidden="true" focusable="false"><image href="../../assets/celulas.png" width="1280" height="1280"/></svg>
+                    Células
+                </a>
+
+                <a href="escalas.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="370 380 515 505" aria-hidden="true" focusable="false"><image href="../../assets/escalas.png" width="1280" height="1280"/></svg>
+                    Escalas
+                </a>
+
+                <a href="campanhas.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="330 390 605 500" aria-hidden="true" focusable="false"><image href="../../assets/campanhas.png" width="1280" height="1280"/></svg>
+                    Campanhas
+                </a>
+
+                
+
+                
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="../login.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="390 395 490 535" aria-hidden="true" focusable="false"><image href="../../assets/saida.png" width="1280" height="1280"/></svg>
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+
+
+
+        <!-- CONTEÚDO -->
+        <main class="main-content">
+
+            <!-- TOPO DO SISTEMA -->
+            <header class="topbar">
+
+                <!-- LADO ESQUERDO -->
+                <div class="topbar-left">
+
+                    <button class="menu-button" type="button" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="true">
+                        ☰
+                    </button>
+
+                    <span>Membros</span>
+
+                </div>
+
+
+                <!-- LADO DIREITO -->
+                <div class="topbar-right">
+
+                    <!-- NOTIFICAÇÕES -->
+                    <button class="notification-button" type="button" aria-label="Notificações"><svg class="navigation-icon" viewBox="390 380 500 495" aria-hidden="true" focusable="false"><image href="../../assets/notificacoes.png" width="1280" height="1280"/></svg></button>
+
+
+                    <!-- PERFIL -->
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            A
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong>Membro</strong>
+                            <span>Membro</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+<section class="dashboard module-page" id="page-content"><div class="page-heading"><div><span class="eyebrow">PAINEL DO MEMBRO</span><h2>Membros</h2><p>Consulte as informações da comunidade e acompanhe sua participação.</p></div></div><p class="demo-notice">Acesso demonstrativo • registros locais deste navegador, sem autenticação real.</p><p id="member-error" role="alert" hidden></p><p class="context-note">Consulta da comunidade. Alterações de cadastro são realizadas pela administração.</p><form id="member-search" class="filters" role="search"><div class="search-field"><label for="search">Buscar</label><input id="search" type="search" placeholder="Buscar nesta listagem"></div><button type="reset" class="button secondary">Limpar</button></form><section class="table-panel"><div class="table-scroll"><table id="member-table"><thead></thead><tbody></tbody></table></div><div class="table-footer"><p id="member-count" aria-live="polite"></p><nav id="member-pagination" aria-label="Paginação"></nav></div></section></section></main></div><dialog id="member-detail"><div class="dialog-heading"><h2>Detalhes</h2><button type="button" class="icon-button" id="close-detail" aria-label="Fechar">×</button></div><div id="detail-content"></div></dialog><div id="toast" role="status" hidden></div><noscript>Ative o JavaScript para usar esta área.</noscript></body></html>

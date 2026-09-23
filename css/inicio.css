@@ -707,3 +707,25 @@
 }
 
 .dashboard-page .availability-feedback a { color: #164C27; text-decoration: underline; }
+
+/* Enquadra os desenhos dos PNGs sem alterar suas margens originais. */
+.menu-item .navigation-icon,
+.notification-button .navigation-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    overflow: hidden;
+    pointer-events: none;
+}
+.notification-button .navigation-icon { width: 22px; height: 22px; flex-basis: 22px; }
+
+.stat-icon .dashboard-icon,
+.event-icon .dashboard-icon {
+    display: block;
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    overflow: hidden;
+    pointer-events: none;
+}

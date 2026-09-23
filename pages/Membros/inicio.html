@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekklesia | Início</title>
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="stylesheet" href="../../css/inicio.css">
+<link rel="stylesheet" href="../../css/gestao.css">
+
+
+<link rel="stylesheet" href="../../css/membro.css">
+<script src="../../js/dados.js" defer></script>
+<script src="../../js/acesso.js" defer></script>
+<script src="../../js/interface.js" defer></script>
+<script src="../../js/campanhas.js" defer></script>
+<script src="../../js/membro.js" defer></script>
+<script src="../../js/disponibilidade-membro.js" defer></script>
+</head>
+<body data-role="member" data-page="inicio" class="dashboard-page member-page">
+<a class="skip-link" href="#page-content">Ir para o conteúdo</a>
+    <div class="layout">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-logo">
+                <img src="../../assets/logo.jpeg" alt="Logo Ekklesia">
+
+                <div>
+                    <h1>EKKLESIA</h1>
+                    <span>Gestão para Comunidades</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Navegação principal">
+
+                <a href="inicio.html" class="menu-item active" aria-current="page">
+                    <svg class="navigation-icon" viewBox="380 410 495 465" aria-hidden="true" focusable="false"><image href="../../assets/inicio.png" width="1280" height="1280"/></svg>
+                    Início
+                </a>
+
+                <a href="membros.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="355 420 545 445" aria-hidden="true" focusable="false"><image href="../../assets/membros.png" width="1280" height="1280"/></svg>
+                    Membros
+                </a>
+
+                <a href="ministerios.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="355 385 545 520" aria-hidden="true" focusable="false"><image href="../../assets/ministerios.png" width="1280" height="1280"/></svg>
+                    Ministérios
+                </a>
+
+                <a href="celulas.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="355 400 545 465" aria-hidden="true" focusable="false"><image href="../../assets/celulas.png" width="1280" height="1280"/></svg>
+                    Células
+                </a>
+
+                <a href="escalas.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="370 380 515 505" aria-hidden="true" focusable="false"><image href="../../assets/escalas.png" width="1280" height="1280"/></svg>
+                    Escalas
+                </a>
+
+                <a href="campanhas.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="330 390 605 500" aria-hidden="true" focusable="false"><image href="../../assets/campanhas.png" width="1280" height="1280"/></svg>
+                    Campanhas
+                </a>
+
+                
+
+                
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="../login.html" class="menu-item">
+                    <svg class="navigation-icon" viewBox="390 395 490 535" aria-hidden="true" focusable="false"><image href="../../assets/saida.png" width="1280" height="1280"/></svg>
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+
+
+
+        <!-- CONTEÚDO -->
+        <main class="main-content">
+
+            <!-- TOPO DO SISTEMA -->
+            <header class="topbar">
+
+                <!-- LADO ESQUERDO -->
+                <div class="topbar-left">
+
+                    <button class="menu-button" type="button" aria-label="Alternar menu" aria-controls="sidebar" aria-expanded="true">
+                        ☰
+                    </button>
+
+                    <span>Início</span>
+
+                </div>
+
+
+                <!-- LADO DIREITO -->
+                <div class="topbar-right">
+
+                    <!-- NOTIFICAÇÕES -->
+                    <button class="notification-button" type="button" aria-label="Notificações"><svg class="navigation-icon" viewBox="390 380 500 495" aria-hidden="true" focusable="false"><image href="../../assets/notificacoes.png" width="1280" height="1280"/></svg></button>
+
+
+                    <!-- PERFIL -->
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            A
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong>Membro</strong>
+                            <span>Membro</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+<section class="dashboard module-page" id="page-content"><div class="page-heading"><div><span class="eyebrow">PAINEL DO MEMBRO</span><h2>Bem-vindo ao Ekklesia</h2><p>Consulte as informações da comunidade e acompanhe sua participação.</p></div><button type="button" class="button secondary" id="open-availability" aria-haspopup="dialog">▦ Selecionar disponibilidade</button></div><p class="demo-notice">Acesso demonstrativo • registros locais deste navegador, sem autenticação real.</p><p id="member-error" role="alert" hidden></p><div class="stats-grid" id="member-stats"></div><div class="dashboard-grid"><section class="dashboard-card"><div class="card-header"><div><small>MINHA PARTICIPAÇÃO</small><h3>Próximas escalas</h3></div><a href="escalas.html">Ver todas</a></div><p class="context-note">Cultos em que há uma designação vinculada ao seu cadastro.</p><div id="my-schedules"></div><p id="availability-feedback" class="availability-feedback" role="status" hidden></p></section><section class="dashboard-card"><div class="card-header"><div><small>AGENDA DA COMUNIDADE</small><h3>Próximos cultos</h3></div></div><div id="member-worships"></div></section></div><section class="campaign-card dashboard-carousel" aria-label="Campanhas em destaque" aria-roledescription="carrossel">
+                    <button type="button" class="carousel-arrow previous" id="previous-campaign" aria-label="Campanha anterior">‹</button>
+                    <div id="campaign-slide" class="campaign-slide" role="group" aria-roledescription="slide">
+                        <div class="campaign-info">
+                            <small id="campaign-status">CAMPANHAS</small>
+                            <h3 id="campaign-title">Carregando campanhas…</h3>
+                            <p id="campaign-description"></p>
+                            <a href="campanhas.html">Ver campanhas</a>
+                        </div>
+                        <div class="campaign-metrics" id="campaign-metrics">
+                            <div class="campaign-amount"><span>Arrecadado</span><strong id="campaign-raised">—</strong></div>
+                            <progress id="campaign-progress" max="100" value="0" aria-label="Progresso da campanha"></progress>
+                            <div class="campaign-amount"><span id="campaign-target">Meta: —</span><strong id="campaign-percent">—</strong></div>
+                            <div class="campaign-stats">
+                                <div><strong id="campaign-donations">—</strong><span>Doações registradas</span></div>
+                                <div><strong id="campaign-other">—</strong><span id="campaign-other-label">Entregue</span></div>
+                            </div>
+                        </div>
+                        <div class="campaign-donation" id="campaign-donation">
+                            <div class="campaign-qr"><img id="campaign-qr-image" alt="" hidden><span id="campaign-qr-placeholder">QR Code<br>não configurado</span></div>
+                            <div><p id="campaign-payment-note">Doação online ainda indisponível.</p><a class="button donate-button" id="donate-link" target="_blank" rel="noopener noreferrer" hidden>♡ Doar agora</a><button class="button donate-button" id="donate-unavailable" type="button" disabled aria-describedby="campaign-payment-note">♡ Doar agora</button></div>
+                        </div>
+                    </div>
+                    <button type="button" class="carousel-arrow next" id="next-campaign" aria-label="Próxima campanha">›</button>
+                    <div class="carousel-dots" role="group" aria-label="Selecionar campanha">
+                        <button type="button" data-campaign-index="0" aria-label="Campanha 1" aria-pressed="true" disabled></button>
+                        <button type="button" data-campaign-index="1" aria-label="Campanha 2" aria-pressed="false" disabled></button>
+                        <button type="button" data-campaign-index="2" aria-label="Campanha 3" aria-pressed="false" disabled></button>
+                    </div>
+                    <p class="sr-only" id="campaign-announcement" aria-live="polite"></p>
+                </section></section></main></div><dialog id="availability-dialog" aria-labelledby="availability-title" aria-describedby="availability-note">
+    <div class="dialog-heading"><h2 id="availability-title">Selecionar data</h2><button type="button" class="icon-button" id="close-availability" aria-label="Fechar calendário">×</button></div>
+    <p class="context-note" id="availability-note">Disponibilidade local para <strong id="availability-identity"></strong>. A liderança poderá consultar este registro; ele não confirma sua escala.</p>
+    <form id="availability-form">
+        <div class="availability-month"><button type="button" class="icon-button" id="previous-month" aria-label="Mês anterior">‹</button><h3 id="availability-month-title" aria-live="polite"></h3><button type="button" class="icon-button" id="next-month" aria-label="Próximo mês">›</button></div>
+        <div class="availability-weekdays" aria-hidden="true"><span>DOM</span><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span></div>
+        <div class="availability-days" id="availability-days" role="group" aria-label="Datas de cultos disponíveis"></div>
+        <p class="context-note" id="calendar-help">Selecione um dia com culto cadastrado.</p>
+        <label for="availability-worship">Culto e horário</label>
+        <select id="availability-worship" required disabled><option value="">Selecione uma data</option></select>
+        <label for="availability-observation" class="observation-label">Observação (opcional)</label>
+        <textarea id="availability-observation" rows="2" maxlength="500" placeholder="Informe alguma observação sobre sua disponibilidade"></textarea>
+        <p class="form-error" id="availability-error" role="alert"></p>
+        <button type="submit" class="button confirm-availability" id="confirm-availability" disabled>Confirmar disponibilidade</button>
+        <p id="availability-history" class="context-note" aria-live="polite"></p>
+    </form>
+</dialog><dialog id="member-detail"><div class="dialog-heading"><h2>Detalhes</h2><button type="button" class="icon-button" id="close-detail" aria-label="Fechar">×</button></div><div id="detail-content"></div></dialog><div id="toast" role="status" hidden></div><noscript>Ative o JavaScript para usar esta área.</noscript></body></html>

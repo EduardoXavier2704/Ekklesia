@@ -1,5 +1,6 @@
 (() => {
   'use strict';
+  if (!window.Ekklesia.access.requireRole('admin')) return;
   if (document.body.dataset.page !== 'escalas') return;
   const { store, schedule } = window.Ekklesia;
   const $ = selector => document.querySelector(selector);

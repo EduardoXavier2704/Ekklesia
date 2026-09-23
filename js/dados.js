@@ -858,6 +858,34 @@ window.Ekklesia = {
     window.addEventListener('ekklesia:storage', onLocal);
     return () => { window.removeEventListener('storage', onStorage); window.removeEventListener('ekklesia:storage', onLocal); };
   }
-  app.store = { dataKey, availabilityKey, load, saveModule, reset, loadAvailability, saveAvailability, cancelAvailability, subscribe };
+  
+  const admin = action => (...args) => { app.access.assertRole('admin'); return action(...args); };
+  const memberSession = () => app.access.assertRole('member');
+  function loadMemberView() {
+    memberSession();
+    const data = load();
+    data.membros = data.membros.map(({id,nome,ministerio,celula,status}) => ({id,nome,ministerio,celula,status}));
+    return data;
+  }
+  function loadMyAvailability() {
+    const session = memberSession();
+    return loadAvailability().filter(row => row.id_membro === session.memberId);
+  }
+  function saveMyAvailability(input, now) {
+    const session = memberSession();
+    if (input.id_membro && input.id_membro !== session.memberId) throw new Error('Você só pode registrar sua própria disponibilidade.');
+    return saveAvailability({...input, id_membro: session.memberId}, now);
+  }
+  function cancelMyAvailability(id) {
+    if (!loadMyAvailability().some(row => row.id === id)) throw new Error('Disponibilidade não pertence a este membro.');
+    cancelAvailability(id);
+  }
+  app.store = {
+    dataKey, availabilityKey, subscribe,
+    listDemoMembers: () => load().membros.filter(row => row.status === 'Ativo').map(({id,nome}) => ({id,nome})),
+    load: admin(load), saveModule: admin(saveModule), reset: admin(reset),
+    loadAvailability: admin(loadAvailability), cancelAvailability: admin(cancelAvailability),
+    loadMemberView, loadMyAvailability, saveMyAvailability, cancelMyAvailability
+  };
   app.schedule = { scheduleDate, isWorship, upcoming };
 })();
